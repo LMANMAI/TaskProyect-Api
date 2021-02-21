@@ -14,7 +14,7 @@ exports.autenticarUsuario = async ( req, res )=>{
     }
     try { 
         //reviso que el usario exista
-        const {email, password}= req.body;         
+        const { email, password }= req.body;         
         let user = await UserModel.findOne({ email });
         if(!user){
             return res.status(404).json({msg: 'No se encontro un usuario con ese email'})
@@ -51,10 +51,12 @@ exports.userAuth = async ( req, res )=> {
      if(!errores.isEmpty()){
          return res.status(400).json({ errores: errores.array() })
      }
-    try {
-        console.log(req.user);
-        const user = await UserModel.findById(req.user._id).select('-password');
+    try {        
+        const user = await UserModel.findById(req.user.id).select('-password');
+        console.log(req.user.id);
+
         res.json({user});
+        
     } catch (error) {
         console.log(error.response);
         res.status(500).json({msg: 'Ocurrio un problema autenticando el usuario'});

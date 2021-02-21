@@ -11,8 +11,6 @@ const authMiddleware = require('../middlewares/auth');
 router.post('/', authController.autenticarUsuario);
 
 //obtengo el usuario autenticado
-router.get('/',
-    authMiddleware,
-    authController.userAuth);
+router.get('/',authMiddleware, authController.userAuth);
 
 module.exports = router;

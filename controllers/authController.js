@@ -52,10 +52,11 @@ exports.userAuth = async ( req, res )=> {
          return res.status(400).json({ errores: errores.array() })
      }
     try {
-        const user = await UserModel.findById(req.user.id).select('-password');
+        console.log(req.user);
+        const user = await UserModel.findById(req.user._id).select('-password');
         res.json({user});
     } catch (error) {
-        //console.log(error);
+        console.log(error.response);
         res.status(500).json({msg: 'Ocurrio un problema autenticando el usuario'});
     }
 }

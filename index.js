@@ -1,6 +1,6 @@
 const express = require('express');
 const conectarDB = require('./config/database');
-const cors = require('cors');
+const cors = require('cors'); 
 const app = express();
 //hanilitar express.json
 app.use(express.json({ extended: true }));

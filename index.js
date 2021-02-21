@@ -17,5 +17,5 @@ app.use('/api/task', require('./routes/task'));
 
 //inicio del servidor
 app.listen(port, '0.0.0.0', ()=>{
-    console.log('desde el servidor, en el puerto:', PORT);
+    console.log('desde el servidor, en el puerto:', port);
 })

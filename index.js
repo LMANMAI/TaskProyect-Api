@@ -9,7 +9,7 @@ conectarDB();
 
 //habilito cors
 app.use( cors() );
-const port = process.env.port || 4000;
+const port = process.env.PORT || 4000;
 //importo las rutas
 app.use('/api/users', require('./routes/usurios'));
 app.use('/api/auth', require('./routes/auth'));

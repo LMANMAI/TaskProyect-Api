@@ -8,7 +8,7 @@ app.use(express.json({ extended: true }));
 app.use(cors());
 //conceto con la db
 conectarDB();
-const PORT = process.env.PORT || 4000;
+const port = process.env.port || 4000;
 //importo las rutas
 app.use('/api/users', require('./routes/usurios'));
 app.use('/api/auth', require('./routes/auth'));
@@ -16,6 +16,6 @@ app.use('/api/proyect', require('./routes/proyecto'));
 app.use('/api/task', require('./routes/task'));
 
 //inicio del servidor
-app.listen(PORT, ()=>{
-    ////console.log('desde el servidor, en el puerto:', PORT);
+app.listen(port, '0.0.0.0', ()=>{
+    console.log('desde el servidor, en el puerto:', PORT);
 })

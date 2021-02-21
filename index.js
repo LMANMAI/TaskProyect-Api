@@ -4,10 +4,11 @@ const cors = require('cors');
 const app = express();
 //hanilitar express.json
 app.use(express.json({ extended: true }));
-//habilito cors
-app.use(cors());
 //conceto con la db
 conectarDB();
+
+//habilito cors
+app.use( cors() );
 const port = process.env.port || 4000;
 //importo las rutas
 app.use('/api/users', require('./routes/usurios'));

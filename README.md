@@ -16,5 +16,14 @@ https://taskservidor.herokuapp.com/
 | `delete` | /api/task/:id | remove task |
 
 ```
-
+{
+        "estado": false,
+        "creado": "2021-04-07T20:41:04.333Z",
+        "_id": "606e1ed8f4065b00153ec624",
+        "nombre": "Proyecto",
+        "desc": "Descripcion del proyecto\n",
+        "creador": "60321bd4e731a3001577adf9",
+        "__v": 0
+}
 ```
+Create a user,authenticate it and start creating proyects and task 🙊

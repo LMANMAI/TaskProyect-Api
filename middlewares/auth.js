@@ -5,7 +5,6 @@ module.exports = function (req, res, next) {
   //x-auth-token
   const token = req.header("x-auth-token");
 
-  ////console.log(token);
   //reviso si no hay token
   if (!token) {
     return res
@@ -18,7 +17,6 @@ module.exports = function (req, res, next) {
     req.user = cifrado.user;
     next();
   } catch (error) {
-    //console.log(error);
     res.status(500).json({ msg: "Hubo un problema validando al usuario" });
   }
 };

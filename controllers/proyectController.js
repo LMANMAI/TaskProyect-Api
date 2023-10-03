@@ -12,18 +12,14 @@ exports.crearProyecto = async (req, res) => {
   verificarErrores(req, res);
   try {
     const proyect = new ProyectModel(req.body);
-    //guardar el creador via JWT
     proyect.creador = req.user.id;
     await proyect.save();
     res.json({ proyect });
-    // //console.log(proyect);
   } catch (error) {
-    //console.log(error);
     res.status(500).json({ msg: "Ocurrio un problema creando el proyecto" });
   }
 };
 //obtengo todos los proyectos del usuario
-//ACA TENGO QUE FILTRAR LOS PROYECTOS QUE ESTEN ACTIVOS(false en el estado) y los que esten terminados true mostrarlos en otro componente
 exports.obtenerProyectos = async (req, res) => {
   verificarErrores(req, res);
   try {
@@ -34,28 +30,35 @@ exports.obtenerProyectos = async (req, res) => {
     res.status(500).json({ msg: "Ocurrio un problema al traer los proyectos" });
   }
 };
+exports.obtenerProyecto = async (req, res) => {
+  verificarErrores(req, res);
+  try {
+    //uso los metodos del modelo para traerme con el find todos los proyectos del usuario, donde el creador tiene que ser igual que le id que esta encriptado en el JWT
+    const proyect = await ProyectModel.findById(req.params.id);
+    res.status(200).json(proyect);
+  } catch (error) {
+    res.status(500).json({
+      msg: "Ocurrio un problema al traer el proyecto correspondiente",
+    });
+  }
+};
 //actualizo el proyecto
 exports.actualizarProyecto = async (req, res) => {
   verificarErrores(req, res);
   try {
-    const { estado } = req.body;
-    //revisar el id del proyecto
+    const { estado, nombre } = req.body;
     let proyecto = await ProyectModel.findById(req.params.id);
-
-    //revisar si el proyecto existe
     if (!proyecto) {
       return res.status(404).json({ msg: "No se encontro el proyecto" });
     }
-    //verificar creador del proyecto
     if (proyecto.creador.toString() !== req.user.id) {
       res
         .status(401)
         .json({ msg: "No se tiene autorizacion para editar el proyecto" });
     }
-    //actualizar
     const proyectEdit = {};
-    //Por cada campo tengo que agregar un if
     proyectEdit.estado = estado;
+    proyectEdit.nombre = nombre;
     proyecto = await ProyectModel.findOneAndUpdate(
       { _id: req.params.id },
       { $set: proyectEdit },

@@ -9,7 +9,7 @@ function verificarErrores(req, res) {
     return res.status(400).json({ errores: errores.array() });
   }
 }
-
+//crear tarea
 exports.crearTask = async (req, res) => {
   verificarErrores(req, res);
   try {
@@ -35,16 +35,13 @@ exports.crearTask = async (req, res) => {
     res.status(500).json({ msg: "Ocurrio un problema agregando la tarea" });
   }
 };
-
 //obtener las tareas
 exports.obtenerTareas = async (req, res) => {
   verificarErrores(req, res);
   try {
-    //verifico que exista un proyecot para agregarle la tarea
+    //verifico que exista un proyecto para agregarle la tarea
     const { proyecto } = req.query;
-    // //console.log(proyecto)
     const proyectoExiste = await ProyectModel.findById(proyecto);
-
     if (!proyectoExiste) {
       return res.status(404).json({ msg: "no se encontro el proyecto" });
     }
@@ -60,6 +57,7 @@ exports.obtenerTareas = async (req, res) => {
     res.status(500).json({ msg: "Ocurrio un problema al traer los proyectos" });
   }
 };
+//editar tarea
 exports.editarTarea = async (req, res) => {
   verificarErrores(req, res);
   try {
@@ -91,7 +89,6 @@ exports.editarTarea = async (req, res) => {
     res.status(500).json({ msg: "Ocurrio un problema editando la tarea" });
   }
 };
-
 //elimino la tarea
 exports.eliminarTarea = async (req, res) => {
   verificarErrores(req, res);

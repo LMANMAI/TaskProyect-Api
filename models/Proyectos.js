@@ -5,6 +5,10 @@ const ProyectoSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  desc: {
+    type: String,
+    trim: true,
+  },
   creador: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Usuario",

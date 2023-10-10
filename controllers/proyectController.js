@@ -46,7 +46,7 @@ exports.obtenerProyecto = async (req, res) => {
 exports.actualizarProyecto = async (req, res) => {
   verificarErrores(req, res);
   try {
-    const { estado, nombre } = req.body;
+    const { estado, nombre, desc } = req.body;
     let proyecto = await ProyectModel.findById(req.params.id);
     if (!proyecto) {
       return res.status(404).json({ msg: "No se encontro el proyecto" });
@@ -59,6 +59,7 @@ exports.actualizarProyecto = async (req, res) => {
     const proyectEdit = {};
     proyectEdit.estado = estado;
     proyectEdit.nombre = nombre;
+    proyectEdit.desc = desc;
     proyecto = await ProyectModel.findOneAndUpdate(
       { _id: req.params.id },
       { $set: proyectEdit },
